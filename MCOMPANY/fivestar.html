@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback & Star Rating</title>
+    <link rel="stylesheet" type="fivestar.html" href="fivestar.html">
+    <style>
+        body {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 20px;
+            color: white;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .stars {
+            display: flex;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        .stars span {
+            color: gray;
+            transition: color 0.3s ease-in-out;
+        }
+        .stars span:hover,
+        .stars span.active {
+            color: gold;
+            transform: scale(1.2);
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            resize: none;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: gold;
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: orange;
+        }
+        footer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Rate Our Service</h2>
+        <div class="stars">
+            <span onclick="rate(1)">★</span>
+            <span onclick="rate(2)">★</span>
+            <span onclick="rate(3)">★</span>
+            <span onclick="rate(4)">★</span>
+            <span onclick="rate(5)">★</span>
+        </div>
+        <p id="rating-text">Your Rating: 0</p>
+        
+        <h3>Leave a Feedback</h3>
+        <textarea id="feedback" placeholder="Write your feedback here..."></textarea>
+        <br>
+        <button onclick="submitFeedback()">Submit Feedback</button>
+    </div>
+
+    <script>
+        function rate(stars) {
+            document.querySelectorAll('.stars span').forEach((span, index) => {
+                span.classList.toggle('active', index < stars);
+            });
+            document.getElementById("rating-text").innerText = `Your Rating: ${stars}`;
+        }
+
+        function submitFeedback() {
+            let rating = document.getElementById("rating-text").innerText.split(": ")[1];
+            let feedback = document.getElementById("feedback").value;
+
+            if (!feedback) {
+                alert("Please enter your feedback before submitting.");
+                return;
+            }
+
+            let mailto = `mailto:company@example.com?subject=Feedback&body=Rating: ${rating}%0D%0AFeedback: ${feedback}`;
+            window.location.href = mailto;
+        }
+    </script>
+    <nav>
+        <ul>
+            <li><a href="index.html"><b>HOME</b></a></li>
+            <li><a href="about.html"><b>ABOUT</b></a></li>
+            <li><a href="contact.html"><b>CONTACT</b></a></li>
+            <li><a href="fivestar.html">FIVESTAR</a></li>
+        </ul>
+    </nav>
+
+    <footer>
+        <p>&copy; 2025 Fifo-Kleen Cleaning Services. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
