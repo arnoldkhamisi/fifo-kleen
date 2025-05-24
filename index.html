@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Fifo-Kleen Cleaning Services - Professional cleaning services for homes and businesses worldwide.">
-    <title>Fifo-Kleen Cleaning Services</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="Fifo-Kleen Cleaning Services - Professional cleaning services for homes and businesses worldwide.">
+  <title>Fifo-Kleen Cleaning Services</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
@@ -13,80 +13,122 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="Booking" href="booking.html">
     <link rel="services" href="services.html">
+
 </head>
 <body>
-    <header>
-        <h1>Fifo-Kleen Cleaning Services</h1>
-    </header>
+  <header>
+    <img src="img/logo.jpg" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%;" />
+    <h1>Fifo-Kleen Cleaning Services</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="index.html"><b>HOME</b></a></li>
+      <li><a href="about.html"><b>ABOUT</b></a></li>
+      <li><a href="contact.html"><b>CONTACT</b></a></li>
+      <li><a href="fivestar.html">FIVESTAR</a></li>
+    </ul>
+  </nav>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h2>Your Trusted Cleaning Partner Worldwide</h2>
-                <p>Experience a clean, fresh space with Fifo-Kleen Cleaning Services.</p>
-                <a href="#contact" class="cta-button">Get in Touch</a>
-            </div>
-        </section>
-    </main>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2>Your Trusted Cleaning Partner Worldwide</h2>
+        <p>Experience a clean, fresh space with Fifo-Kleen Cleaning Services.</p>
+        <a href="#contact" class="cta-button">Get in Touch</a>
+      </div>
+    </section>
 
-    <div class="cta">
-        <h2>Contact Us Today!</h2>
-        <p>Ready to enjoy a cleaner space? Contact Fifo-Kleen Cleaning Services now to schedule your cleaning service.</p>
-        <a href="contact.html" class="cta-button">Get Started</a>
-    </div>
+    <section class="services">
+      <h2>Our Services</h2>
+      <div class="service-list">
+        <div class="service-item">
+          <h3>Residential Cleaning</h3>
+          <p>We provide thorough cleaning solutions for homes of all sizes.</p>
+        </div>
+        <div class="service-item">
+          <h3>Office Cleaning</h3>
+          <p>Keep your workplace spotless and professional with our regular cleaning plans.</p>
+        </div>
+        <div class="service-item">
+          <h3>Deep Cleaning</h3>
+          <p>Intensive cleaning for spaces that need special attention and care.</p>
+        </div>
+        <div class="service-item">
+          <h3>Move In/Out Cleaning</h3>
+          <p>Perfect for tenants, landlords, or agents to ensure a sparkling transition.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <nav>
-        <ul>
-            <li><a href="index.html"><b>HOME</b></a></li>
-            <li><a href="contact.html"><b>CONTACT</b></a></li>
-            <li><a href="fivestar.html">FIVESTAR</a></li>
-            <li><a href="booking.html">BOOKING</a></li>
-            <li><a href="services.html">SERVICES</a></li>
-        </ul>
-    </nav>
+  <div class="cta">
+    <h2>Contact Us Today!</h2>
+    <p>Ready to enjoy a cleaner space? Contact Fifo-Kleen Cleaning Services now to schedule your cleaning service.</p>
+    <a href="contact.html" class="cta-button">Get Started</a>
+  </div>
+  <!-- Booking Section -->
+  <form action="submit_booking.php" method="POST">
+    <label>Name:</label><br>
+    <input type="text" name="name" required><br><br>
 
-    <section class="text-center py-12 bg-gradient-to-br from-green-100 to-green-300">
-        <h2 class="text-4xl font-bold mb-2">Welcome to Fifo-Kleen</h2>
-        <p class="text-lg">Professional cleaning services tailored to your needs.</p>
-      </section>
-    
-    <!-- Services Section -->
-      <section id="services" class="p-6 max-w-6xl mx-auto">
-        <h3 class="text-3xl font-bold text-center mb-6">Our Services</h3>
-        <div class="grid gap-6 md:grid-cols-2">
-          <div class="bg-white p-6 rounded-xl shadow">
-            <h4 class="text-xl font-semibold">Post-Construction Cleaning</h4>
-            <p>Thorough cleaning after construction or renovation projects.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow">
-            <h4 class="text-xl font-semibold">Professional/Office Cleaning</h4>
-            <p>Reliable services for commercial spaces and offices.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow">
-            <h4 class="text-xl font-semibold">Surface Cleaning</h4>
-            <p>Routine cleaning of all surfaces to maintain hygiene.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow">
-            <h4 class="text-xl font-semibold">Deep Cleaning</h4>
-            <p>Intensive cleaning covering all areas of your space.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow">
-            <h4 class="text-xl font-semibold">Shampooing</h4>
-            <p>Carpet and upholstery shampooing services.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow">
-            <h4 class="text-xl font-semibold">Dry Cleaning</h4>
-            <p>Convenient dry cleaning pickup and delivery.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow">
-            <h4 class="text-xl font-semibold">Detail-Car Cleaning</h4>
-            <p>Interior and exterior car detailing services.</p>
-          </div>
-          </div>
-          </section>
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br><br>
 
-    <footer>
-        <p><b>&copy; 2025 Fifo-Kleen Cleaning Services. All rights reserved.</b></p>
-    </footer>
+    <label>Select Service:</label><br>
+    <select name="service" required>
+      <option value="Post-Construction Cleaning">Post-Construction Cleaning</option>
+      <option value="Professional/Office Cleaning">Professional/Office Cleaning</option>
+      <option value="Surface Cleaning">Surface Cleaning</option>
+      <option value="Deep Cleaning">Deep Cleaning</option>
+      <option value="Shampooing">Shampooing</option>
+      <option value="Dry Cleaning">Dry Cleaning</option>
+      <option value="Detail-Car Cleaning">Detail-Car Cleaning</option>
+    </select><br><br>
+
+    <label>Preferred Date:</label><br>
+    <input type="date" name="date" required><br><br>
+
+    <button type="submit">Book Now</button>
+  </form>
+  
+  <script>
+document.getElementById("bookingForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch("book.php", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    if (data.trim() === "success") {
+      alert("Successfully booked!");
+      form.reset();
+    } else {
+      alert("Error: " + data);
+    }
+  })
+  .catch(err => {
+    alert("Request failed: " + err);
+  });
+});
+</script>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="bg-green-100 p-6 mt-10 text-center">
+    <h3 class="text-2xl font-bold mb-2">Contact Us</h3>
+    <p>Email: contact@fifokleen.com</p>
+    <p>Phone: +254 728 297 498</p>
+    <p>Phone: +254 719 121 724</p>
+    <p>Location: Nairobi, Kenya</p>
+  </section>
+
+  <footer>
+    <p><b>&copy; 2025 Fifo-Kleen Cleaning Services. All rights reserved.</b></p>
+  </footer>
 </body>
 </html>
