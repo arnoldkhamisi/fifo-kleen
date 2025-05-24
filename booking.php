@@ -14,16 +14,18 @@ if ($conn->connect_error) {
 }
 
 // Get form values
+$id= $_POST['id'];
 $name = $_POST['name'];
 $email = $_POST['email'];
 $service = $_POST['service'];
 $date = $_POST['date'];
 
+
 // Insert into database
-$sql = "INSERT INTO bookings (name, email, service, date)
+$sql = "INSERT INTO bookings (id, name, email, service, date)
         VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssss", $name, $email, $service, $date);
+$stmt->bind_param("sssss", $id, $name, $email, $service, $date);
 
 if ($stmt->execute()) {
     echo "✅ Booking successful. We'll contact you soon!";
