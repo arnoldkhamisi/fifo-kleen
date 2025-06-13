@@ -1,0 +1,215 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+	  background-image: url('img/logo.jpg');
+	  background-color: rgba(0, 0, 0, 0.5);
+	  background-blend-mode: multiply;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	  background-attachment: fixed; 
+      font-family: 'georgian';
+      color: #005A9C;
+      background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+    }
+	
+
+    header {
+	img {
+	  width: 100px; 
+	  height: 100px; 
+	  border-radius: 200%;
+	  }
+      background-color: blue;
+      padding: 60px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3em;
+      color: #FFD700;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      color: #005A9C;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: blue;
+      text-decoration: underline;
+    }
+
+    .cta-button {
+      background-color: #FFD700;
+      color: #005A9C;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-top: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .cta-button:hover {
+      background-color: #005A9C;
+      color: #fff;
+    }
+	
+	nav ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px 0;
+      background-color: #005A9C;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      font-size: 1.2em;
+      color: #fff;
+    }
+
+    .hero {
+      background: url('pictures/logo.jpg') no-repeat center center/cover;
+      padding: 100px 20px;
+      text-align: center;
+      color: yellow;
+      background-blend-mode: overlay;
+      background-color: rgba(0, 90, 156, 0.3);
+    }
+
+    .hero .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .cta {
+      text-align: center;
+      margin: 60px 20px;
+    }
+
+    .services {
+      padding: 60px 20px;
+      background-color: #f4faff;
+      text-align: center;
+    }
+
+    .services h2 {
+      margin-bottom: 40px;
+    }
+
+    .service-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .service-item {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 250px;
+      transition: transform 0.3s ease;
+    }
+
+    .service-item:hover {
+      transform: translateY(-5px);
+    }
+
+	
+	/* Booking Form */
+  form {
+    background: grey;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  form label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+  
+  form input,
+  form select,
+  form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.3rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+  }
+  
+  form button {
+    background-color: #0f766e;
+    color: rgb(180, 240, 172);
+    padding: 0.8rem 1.5rem;
+    margin-top: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #0d5e59;
+  }
+  
+  /* Contact */
+  .contact-info {
+    background: #e0f2f1;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .contact-info p {
+    margin-bottom: 0.5rem;
+  }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #003e6b;
+      color: white;
+      margin-top: 40px;
+    }
