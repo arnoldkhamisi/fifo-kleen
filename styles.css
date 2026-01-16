@@ -35,7 +35,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: rgba(87, 231, 123, 0.85);
+      background-color: #005A9C;
       padding: 10px 20px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       font-family: 'Poppins', sans-serif;
@@ -81,7 +81,7 @@
 
     .navbar ul li a {
       text-decoration: none;
-      color: #340aee;
+      color: yellow;
       font-size: 1.1em;
       font-weight: bold;
     }
@@ -91,7 +91,7 @@
     }
     h2 {
       font-family: 'Poppins', sans-serif;
-      color: #005A9C;
+      color: blue;
       font-size: 2em;
       margin-bottom: 10px;
     }
