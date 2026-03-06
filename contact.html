@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Contact Fifo-Kleen Cleaning Services - Professional cleaning services worldwide">
     <title>Contact Us - Fifo-Kleen Cleaning Services</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="fivestar.html" href="fivestar.html">
+    <link rel="stylesheet" href="styles.css">
 
     <style>
         body {
@@ -14,7 +13,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            background: url('pictures/logo.jpg') no-repeat center center/cover; /* Replace 'your-image.jpg' with the actual image file */
+            background: url('img/logo.jpg') no-repeat center center/cover;
             color: #fff;
             position: relative;
         }
@@ -85,6 +84,36 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <div class="logo-corner">
+            <div class="img-container">
+                <svg class="circular-text" viewBox="0 0 200 200">
+                    <defs>
+                        <path id="topArc" d="M 20, 100 A 80,80 0 0,1 180,100" fill="none" />
+                        <path id="bottomArc" d="M 180, 100 A 80,80 0 0,1 20,100" fill="none" />
+                    </defs>
+                    <text font-size="18" letter-spacing="4">
+                        <textPath href="#topArc" startOffset="50%" text-anchor="middle">FIFO-KLEEN</textPath>
+                    </text>
+                    <text font-size="16" letter-spacing="2.5">
+                        <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">CLEANING SERVICES</textPath>
+                    </text>
+                </svg>
+                <img src="img/logo.jpg" alt="Logo" class="navbar-logo" />
+            </div>
+        </div>
+        <div class="nav-info">
+            <ul>
+                <li><a href="index.html"><b>HOME</b></a></li>
+                <li><a href="services.html"><b>SERVICES</b></a></li>
+                <li><a href="contact.html"><b>CONTACT</b></a></li>
+                <li><a href="fivestar.html">FIVESTAR</a></li>
+                <li class="mode-toggle-item">
+                    <button type="button" id="modeToggleBtn" class="mode-btn" aria-pressed="false">☀ Light</button>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div class="container">
         <h1>Contact Fifo-Kleen Cleaning Services</h1>
@@ -96,7 +125,7 @@
             <p>📞 <strong>Phone:</strong> +254 (07) 728 297 498</p>
             <p>📞 <strong>Phone:</strong> +254 (07) 719 121 724</p>
             <p>🌐 <strong>Website:</strong> <a href="http://www.fifo-kleencleaningservices.com" style="color: #ffcc00;">www.fifo-kleencleaningservices.com</a></p>
-			<p>📧 <strong>Email:</strong> <a href="mailto:info@fifo-kleencleaningservices@fifo-kleencleaningservices.com" style="color: #ffcc00;">info@fifo-kleencleaningservices.com</a></p>
+			<p>📧 <strong>Email:</strong> <a href="mailto:info@fifo-kleencleaningservices.com" style="color: #ffcc00;">info@fifo-kleencleaningservices.com</a></p>
         </div>
 
         <div class="cta">
@@ -115,14 +144,30 @@
 
         <p>We’d love to hear from you! Have questions or specific requests? Don’t hesitate to contact us. Your satisfaction is our priority, and we’re here to help make your cleaning experience stress-free and seamless.</p>
     </div>
-    <nav>
-        <ul>
-            <li><a href="index.html"><b>HOME</b></a></li>
-            <li><a href="services.html"><b>SERVICES</b></a></li>
-            <li><a href="contact.html"><b>CONTACT</b></a></li>
-            <li><a href="fivestar.html">FIVESTAR</a></li>
-        </ul>
-    </nav>
+    <script>
+        const modeToggleBtn = document.getElementById("modeToggleBtn");
+        const savedTheme = localStorage.getItem("themeMode");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        function applyTheme(theme) {
+            const isDark = theme === "dark";
+            document.body.classList.toggle("dark-mode", isDark);
+            if (modeToggleBtn) {
+                modeToggleBtn.textContent = isDark ? "🌙 Dark" : "☀ Light";
+                modeToggleBtn.classList.toggle("active", isDark);
+                modeToggleBtn.setAttribute("aria-pressed", isDark ? "true" : "false");
+            }
+            localStorage.setItem("themeMode", theme);
+        }
+
+        applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
+        if (modeToggleBtn) {
+            modeToggleBtn.addEventListener("click", () => {
+                const nextTheme = document.body.classList.contains("dark-mode") ? "light" : "dark";
+                applyTheme(nextTheme);
+            });
+        }
+    </script>
 
     <footer>
         <p><b><font color="yellow">&copy; 2025 Fifo-Kleen Cleaning Services. All rights reserved.</font></b></p>

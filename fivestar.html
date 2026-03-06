@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback & Star Rating</title>
-    <link rel="stylesheet" type="fivestar.html" href="fivestar.html">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             background: linear-gradient(to right, #1e3c72, #2a5298);
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            margin: 20px;
+            margin: 0;
             color: white;
         }
         .container {
             background: rgba(0, 0, 0, 0.6);
             padding: 20px;
             border-radius: 10px;
-            width: 50%;
-            margin: auto;
+            width: min(700px, 90%);
+            margin: 20px auto;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .stars {
@@ -26,10 +26,13 @@
             justify-content: center;
             font-size: 40px;
             cursor: pointer;
+            margin: 10px 0;
         }
         .stars span {
-            color: gray;
+            color: gold;
             transition: color 0.3s ease-in-out;
+            user-select: none;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.45);
         }
         .stars span:hover,
         .stars span.active {
@@ -59,59 +62,136 @@
         button:hover {
             background-color: orange;
         }
+        #status {
+            margin-top: 12px;
+            min-height: 22px;
+        }
         footer {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <div class="logo-corner">
+            <div class="img-container">
+                <svg class="circular-text" viewBox="0 0 200 200">
+                    <defs>
+                        <path id="topArc" d="M 20, 100 A 80,80 0 0,1 180,100" fill="none" />
+                        <path id="bottomArc" d="M 180, 100 A 80,80 0 0,1 20,100" fill="none" />
+                    </defs>
+                    <text font-size="18" letter-spacing="4">
+                        <textPath href="#topArc" startOffset="50%" text-anchor="middle">FIFO-KLEEN</textPath>
+                    </text>
+                    <text font-size="16" letter-spacing="2.5">
+                        <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">CLEANING SERVICES</textPath>
+                    </text>
+                </svg>
+                <img src="img/logo.jpg" alt="Logo" class="navbar-logo" />
+            </div>
+        </div>
+        <div class="nav-info">
+            <ul>
+                <li><a href="index.html"><b>HOME</b></a></li>
+                <li><a href="services.html"><b>SERVICES</b></a></li>
+                <li><a href="contact.html"><b>CONTACT</b></a></li>
+                <li><a href="fivestar.html">FIVESTAR</a></li>
+                <li class="mode-toggle-item">
+                    <button type="button" id="modeToggleBtn" class="mode-btn" aria-pressed="false">☀ Light</button>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div class="container">
         <h2>Rate Our Service</h2>
-        <div class="stars">
-            <span onclick="rate(1)">★</span>
-            <span onclick="rate(2)">★</span>
-            <span onclick="rate(3)">★</span>
-            <span onclick="rate(4)">★</span>
-            <span onclick="rate(5)">★</span>
+        <div class="stars" aria-label="Star rating">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
         </div>
         <p id="rating-text">Your Rating: 0</p>
-        
-        <h3>Leave a Feedback</h3>
-        <textarea id="feedback" placeholder="Write your feedback here..."></textarea>
-        <br>
-        <button onclick="submitFeedback()">Submit Feedback</button>
+
+        <h3>Leave Feedback</h3>
+        <form id="feedbackForm" action="submit_feedback.php" method="POST">
+            <input type="hidden" id="rating" name="rating" value="0">
+            <textarea id="note" name="note" placeholder="Write your feedback here..." required></textarea>
+            <br>
+            <button type="submit">Submit Feedback</button>
+        </form>
+        <p id="status"></p>
     </div>
 
     <script>
-        function rate(stars) {
-            document.querySelectorAll('.stars span').forEach((span, index) => {
-                span.classList.toggle('active', index < stars);
+        const stars = document.querySelectorAll('.stars span');
+        const ratingInput = document.getElementById('rating');
+        const ratingText = document.getElementById('rating-text');
+        const feedbackForm = document.getElementById('feedbackForm');
+        const statusEl = document.getElementById('status');
+
+        stars.forEach((star) => {
+            star.addEventListener('click', () => {
+                const selected = Number(star.dataset.value);
+                ratingInput.value = String(selected);
+                ratingText.textContent = `Your Rating: ${selected}`;
+                stars.forEach((item, idx) => item.classList.toggle('active', idx < selected));
             });
-            document.getElementById("rating-text").innerText = `Your Rating: ${stars}`;
-        }
+        });
 
-        function submitFeedback() {
-            let rating = document.getElementById("rating-text").innerText.split(": ")[1];
-            let feedback = document.getElementById("feedback").value;
-
-            if (!feedback) {
-                alert("Please enter your feedback before submitting.");
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const rating = Number(ratingInput.value);
+            if (rating < 1 || rating > 5) {
+                statusEl.textContent = 'Please choose a star rating before submitting.';
                 return;
             }
 
-            let mailto = `mailto:company@example.com?subject=Feedback&body=Rating: ${rating}%0D%0AFeedback: ${feedback}`;
-            window.location.href = mailto;
+            try {
+                const response = await fetch('submit_feedback.php', {
+                    method: 'POST',
+                    body: new FormData(feedbackForm)
+                });
+                const result = (await response.text()).trim();
+                if (response.ok && result === 'success') {
+                    statusEl.textContent = 'Thanks for your feedback.';
+                    feedbackForm.reset();
+                    ratingInput.value = '0';
+                    ratingText.textContent = 'Your Rating: 0';
+                    stars.forEach((item) => item.classList.remove('active'));
+                } else {
+                    statusEl.textContent = `Submission failed: ${result || 'Unknown error'}`;
+                }
+            } catch (error) {
+                statusEl.textContent = `Request failed: ${error}`;
+            }
+        });
+    </script>
+    <script>
+        const modeToggleBtn = document.getElementById("modeToggleBtn");
+        const savedTheme = localStorage.getItem("themeMode");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        function applyTheme(theme) {
+            const isDark = theme === "dark";
+            document.body.classList.toggle("dark-mode", isDark);
+            if (modeToggleBtn) {
+                modeToggleBtn.textContent = isDark ? "🌙 Dark" : "☀ Light";
+                modeToggleBtn.classList.toggle("active", isDark);
+                modeToggleBtn.setAttribute("aria-pressed", isDark ? "true" : "false");
+            }
+            localStorage.setItem("themeMode", theme);
+        }
+
+        applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
+        if (modeToggleBtn) {
+            modeToggleBtn.addEventListener("click", () => {
+                const nextTheme = document.body.classList.contains("dark-mode") ? "light" : "dark";
+                applyTheme(nextTheme);
+            });
         }
     </script>
-    <nav>
-        <ul>
-            <li><a href="index.html"><b>HOME</b></a></li>
-            <li><a href="services.html"><b>SERVICES</b></a></li>
-            <li><a href="contact.html"><b>CONTACT</b></a></li>
-            <li><a href="fivestar.html">FIVESTAR</a></li>
-        </ul>
-    </nav>
 
     <footer>
         <p>&copy; 2025 Fifo-Kleen Cleaning Services. All rights reserved.</p>

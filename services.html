@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Fifo-Kleen Cleaning Services</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="fivestar.html" href="fivestar.html">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('pictures/background.png') no-repeat center center fixed;
+            background: url('img/pexels-pixabay-268874.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #333;
         }
         header {
-            background-color: rgba(255, 0, 0, 0.8);
+            background-color: rgba(255, 215, 0, 0.88);
             padding: 20px;
             text-align: center;
-            color: white;
+            color: #003e6b;
             font-size: 24px;
             font-weight: bold;
         }
@@ -65,293 +64,210 @@
             border-radius: 10px;
             max-width: 800px;
         }
+        .service-summary {
+            max-width: 1100px;
+            margin: 20px auto 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        .service-summary h1 {
+            text-align: center;
+            margin-bottom: 16px;
+            color: #005A9C;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(0, 90, 156, 0.2);
+            border-radius: 12px;
+            padding: 14px;
+            backdrop-filter: blur(10px);
+        }
+        .service-card h2 {
+            color: #005A9C;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+        .service-card p {
+            margin: 0;
+            line-height: 1.6;
+            color: #17324d;
+        }
+        .about-hero {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(10px);
+        }
+        .about-hero h1 {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #005A9C;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border: 1px solid rgba(0, 90, 156, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .info-card h2 {
+            margin-bottom: 10px;
+            color: #005A9C;
+            font-size: 1.3rem;
+        }
+        .info-card p,
+        .info-card li {
+            color: #17324d;
+            opacity: 1;
+            text-shadow: none;
+            font-weight: 500;
+        }
+        .info-card ul {
+            padding-left: 18px;
+        }
         h1, h2, h3 {
             color: blue;
+        }
+        .about-hero,
+        .service-summary,
+        .service-card,
+        .info-card {
+            text-shadow: none;
+            filter: none;
+        }
+        body.dark-mode .about-hero,
+        body.dark-mode .service-summary {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        body.dark-mode .info-card,
+        body.dark-mode .service-card {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: rgba(0, 90, 156, 0.25);
+        }
+        body.dark-mode .info-card h2,
+        body.dark-mode .service-card h2,
+        body.dark-mode .info-card p,
+        body.dark-mode .info-card li,
+        body.dark-mode .service-card p {
+            color: #17324d !important;
+            text-shadow: none !important;
         }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <div class="logo-corner">
+            <div class="img-container">
+                <svg class="circular-text" viewBox="0 0 200 200">
+                    <defs>
+                        <path id="topArc" d="M 20, 100 A 80,80 0 0,1 180,100" fill="none" />
+                        <path id="bottomArc" d="M 180, 100 A 80,80 0 0,1 20,100" fill="none" />
+                    </defs>
+                    <text font-size="18" letter-spacing="4">
+                        <textPath href="#topArc" startOffset="50%" text-anchor="middle">FIFO-KLEEN</textPath>
+                    </text>
+                    <text font-size="16" letter-spacing="2.5">
+                        <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">CLEANING SERVICES</textPath>
+                    </text>
+                </svg>
+                <img src="img/logo.jpg" alt="Logo" class="navbar-logo" />
+            </div>
+        </div>
+        <div class="nav-info">
+            <ul>
+                <li><a href="index.html"><b>HOME</b></a></li>
+                <li><a href="services.html"><b>SERVICES</b></a></li>
+                <li><a href="contact.html"><b>CONTACT</b></a></li>
+                <li><a href="fivestar.html">FIVESTAR</a></li>
+                <li class="mode-toggle-item">
+                    <button type="button" id="modeToggleBtn" class="mode-btn" aria-pressed="false">☀ Light</button>
+                </li>
+            </ul>
+        </div>
+    </div>
     <header>
         About The Fifo-Kleen Cleaning Services
     </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="services.html">SERVICES</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
-            <li><a href="fivestar.html">FIVESTAR</a></li>
-        </ul>
-    </nav>
-    <section class="about">
-        <h1>About Us</h1>
-
-        <p>At Fifo-Kleen Cleaning Services, we pride ourselves on delivering top-notch cleaning services to homes and businesses around the globe. Our team is committed to excellence, ensuring every corner shines bright.</p>
-        <h1>Our Mission</h1>
-        <p>To provide exceptional cleaning services that brings peace of mind and satisfaction while promoting a cleaner, greener planet.</p>
-        <h1>Our Values</h1>
-        <ul>
-            <li>Reliability: We show up on time and deliver consistent, high-quality results.</li>
-            <li>Trust: Your space is our priority, and we treat it with the utmost care.</li>
-            <li>Innovation: We use advanced techniques and eco-friendly products.</li>
-        </ul>
-        <h1>Why Choose Us?</h1>
-        <p>✔ Comprehensive residential and commercial cleaning services.</p>
-        <p>✔ Experienced and professional staff.</p>
-        <p>✔ Flexible scheduling to suit your busy lifestyle.</p>
+    <section class="about-hero">
+        <h1>About Fifo-Kleen Cleaning Services</h1>
+        <div class="info-grid">
+            <article class="info-card">
+                <h2>About Us</h2>
+                <p>We deliver reliable, high-quality cleaning services for homes and businesses. Our team is trained, detail-oriented, and committed to creating healthier and more welcoming spaces.</p>
+            </article>
+            <article class="info-card">
+                <h2>Our Mission</h2>
+                <p>To provide exceptional cleaning services that bring peace of mind and satisfaction while promoting a cleaner, greener environment through sustainable cleaning methods.</p>
+            </article>
+            <article class="info-card">
+                <h2>Our Values</h2>
+                <ul>
+                    <li>Reliability: Consistent quality delivered on time.</li>
+                    <li>Trust: Respectful handling of every space.</li>
+                    <li>Innovation: Smart techniques and eco-friendly products.</li>
+                </ul>
+            </article>
+            <article class="info-card">
+                <h2>Why Choose Us?</h2>
+                <ul>
+                    <li>Comprehensive residential and commercial services.</li>
+                    <li>Experienced and professional staff.</li>
+                    <li>Flexible scheduling to fit your routine.</li>
+                    <li>Strong focus on safe, non-toxic cleaning products.</li>
+                </ul>
+            </article>
+        </div>
     </section>
-    <div class="about">
-        <p>At Fifo-Kleen Cleaning Services, we believe that cleanliness is more than just appearance – it’s about creating healthier, more welcoming environments for homes and businesses alike.</p>
-        <p>At Fifo-Kleen Cleaning Services, we pride ourselves on delivering top-notch cleaning services to homes and businesses around the globe. Our team is committed to excellence, ensuring every corner shines bright. We use eco-friendly products to keep your space safe and sparkling.</p>
-        <p> Established with a commitment to excellence, we have grown into a trusted partner for clients worldwide, delivering top-tier cleaning solutions tailored to your needs.</p>
-</div>
-        <p>Our team consists of highly trained, detail-oriented professionals who take pride in transforming spaces into sparkling havens. From everyday tidying to deep cleaning and eco-friendly practices, we ensure your space isn’t just clean, but truly refreshed and rejuvenated.</p>
-
-        <h1><u><font color="blue">Our Mission:</font></u></h1>
-        <p>To provide exceptional cleaning services that brings peace of mind and satisfaction, while promoting a cleaner, greener planet through sustainable cleaning methods.</p>
-
-        <h1><u><font color="blue">Our Values:</font></u></h1>
-
-        <li>Reliability: We show up on time and deliver consistent, high-quality results.</li>
-        <li>Trust: Your space is our priority, and we treat it with the utmost care and respect.</li>
-        <li>Innovation: We use advanced techniques and eco-friendly products to ensure top-notch cleaning.</li>
-
-            <h1><u><font color="blue">Why Choose Us?</font></u></h1>
-
-        <p>Comprehensive residential and commercial cleaning services.</p>
-        <p>Experienced and professional staff committed to your satisfaction.</p>
-        <p>Flexible scheduling to suit your busy lifestyle.</p>
-        <p>A focus on eco-friendly, non-toxic cleaning products.</p>
+    <section class="service-summary">
+        <h1>Professional Services at a Glance</h1>
+        <div class="service-grid">
+            <article class="service-card">
+                <h2>1. Car Detailing</h2>
+                <p>Complete interior and exterior detailing, including stain removal, polishing, and odor treatment for a clean and refreshed vehicle.</p>
+            </article>
+            <article class="service-card">
+                <h2>2. Dry Cleaning</h2>
+                <p>Fabric-safe garment care using professional solvent methods for stain treatment, cleaning, and neat finishing.</p>
+            </article>
+            <article class="service-card">
+                <h2>3. Shampooing</h2>
+                <p>Deep shampoo cleaning for carpets, upholstery, mattresses, and vehicle interiors to remove dirt, stains, and odor.</p>
+            </article>
+            <article class="service-card">
+                <h2>4. Deep Cleaning</h2>
+                <p>Thorough top-to-bottom cleaning with sanitization for homes, offices, and high-use spaces requiring detailed hygiene care.</p>
+            </article>
+            <article class="service-card">
+                <h2>5. Surface Cleaning</h2>
+                <p>Routine maintenance cleaning for desks, counters, floors, and glass surfaces to keep spaces tidy and presentable daily.</p>
+            </article>
+            <article class="service-card">
+                <h2>6. Office Cleaning</h2>
+                <p>Reliable workplace cleaning programs tailored for offices and business premises, with attention to hygiene and presentation.</p>
+            </article>
+            <article class="service-card">
+                <h2>7. Post-Construction Cleaning</h2>
+                <p>Debris and dust removal after construction or renovation, with final detailing to make spaces safe and move-in ready.</p>
+            </article>
+        </div>
     </section>
-    <div class="container">
-        <h1><u><font color="blue">Services Offered by Fifo-Kleen Cleaning Services</font></u></h1>
-        <p>At Fifo-Kleen Cleaning Services, we offer a wide range of professional cleaning services to cater to your unique needs. Our dedicated team ensures your spaces are spotless and refreshed!</p>
-
-<section class="service">
-        <div class="service">
-            <h2><u><font color="blue">1. Detail-Car Cleaning(car detailing)🚗✨</font></u></h2>
-            <h3>Exterior Detailing 🏎️✨</h3>
-                <p>Cleans, restores, and protects the car’s paint, glass, and wheels.</p>
-            <br>🔹 Washing & Drying – Hand wash to remove dirt and grime.
-            <br>🔹 Clay Bar Treatment – Removes embedded contaminants from the paint.
-            <br>🔹 Polishing & Buffing – Restores shine and removes light scratches.
-            <br>🔹 Waxing & Sealant – Adds a protective layer for a glossy finish.
-            <br>🔹 Tire & Rim Cleaning – Removes brake dust and polishes wheels.
-            <br>🔹 Headlight Restoration – Removes fogginess and improves visibility.
-
-            <h3>Interior Detailing 🛋️🚙</h3>
-                <p>Deep cleaning of the seats, carpets, dashboard, and other surfaces.</p>
-
-            <br>🔹 Vacuuming – Removes dust and debris from seats, carpets, and trunk.
-            <br>🔹 Shampooing & Steam Cleaning – Deep cleans fabric seats and carpets.
-            <br>🔹 Leather Cleaning & Conditioning – Preserves and protects leather seats.
-            <br>🔹 Dashboard & Console Cleaning – Removes dust, fingerprints, and grime.
-            <br>🔹 Glass & Mirror Cleaning – Ensures crystal-clear visibility.
-            <br>🔹 Odor Removal – Eliminates bad smells using ozone treatment or deodorizing sprays.
-
-
-                <h3>Additional Services (Optional):</h3>
-
-                <br>✅ Engine Bay Cleaning – Removes dirt and grease from the engine area.
-                <br>✅ Ceramic Coating – Long-lasting paint protection.
-                <br>✅ Paint Correction – Removes deep scratches and swirl marks.
-                <br>✅ Pet Hair Removal – Specialized cleaning for stubborn pet fur.
-
-
-                <h3>Benefits of Car Detailing:</h3>
-
-                <br>🚘 Restores Original Shine – Makes the car look brand new.
-                <br>🚘 Protects Paint & Interior – Prevents fading, cracking, and wear.
-                <br>🚘 Increases Resale Value – A well-maintained car sells for more.
-                <br>🚘 Removes Odors & Allergens – Improves air quality inside the car.
-        </div>
-
-        <br><div class="service">
-            <h2><u><font color="blue">2. Dry Cleaning 🧼👕</font></u></h2>
-
-            <h3>How Dry cleaning works:</h3>
-            <br>1️⃣ Pre-Treatment – Stains are identified and treated with special stain removers.
-<br> 2️⃣ Cleaning with Solvents – Clothes are placed in a machine that cleans them using a liquid solvent (usually perchloroethylene or hydrocarbon-based solvents) instead of water.
-<br> 3️⃣ Extraction & Drying – The solvent is removed, and the fabric is gently dried.
-<br> 4️⃣ Pressing & Finishing – Garments are steamed, pressed, and made ready for use.
-        </div>
-
-        <div class="service">
-            <h2><u><font color="blue">3. Shampooing</font></u></h2>
-            <h3>How Shampooing Works:</h3>
-<br>1️⃣ Pre-Treatment – Stains and heavily soiled areas are treated with a cleaning solution.
-<br>2️⃣ Application – A foamy shampoo detergent is applied to the surface.
-<br>3️⃣ Agitation – A brush or rotary machine scrubs the shampoo deep into the fibers to break down dirt.
-<br>4️⃣ Extraction – A vacuum or wet extractor removes the foam along with dirt and grime.
-<br>5️⃣ Drying – The surface is left to air dry or speed-dried with fans.
-
-<h3>Best Uses for Shampooing:</h3>
-<br>✅ Carpets & Rugs – Removes deep-seated dirt and refreshes fibers.
-<br>✅ Upholstery (Sofas & Chairs) – Lifts stains and restores fabric freshness.
-<br>✅ Mattresses – Eliminates dust, sweat stains, and allergens.
-<br>✅ Car Interiors (Seats & Floor Mats) – Cleans fabric seats and removes odors.
-
-            <h3>Pros & Cons of Shampooing🧼🛋️:</h3>
-<br>✅ Pros:
-<br>✔ Deep Cleaning Power – Effectively removes dirt, stains, and odors.
-<br>✔ Restores Fabric Appearance – Brightens colors and refreshes the look.
-<br>✔ Affordable & Widely Available – Common in carpet and upholstery cleaning services.
-        </div>
-
-
-        <div class="service">
-            <h2><u><font color="blue">4. Deep Cleaning🧼👕</font></u></h2>
-            <h3>Key Features of Deep Cleaning:</h3>
-<br>✅ Goes beyond surface cleaning – Cleans behind furniture, under carpets, and inside appliances.
-<br>✅ Removes bacteria, allergens, and mold – Improves air quality and hygiene.
-<br>✅ Restores the original look of surfaces – Makes floors, walls, and upholstery look fresh.
-<br>✅ Involves sanitization and disinfecting – Reduces germs and prevents illness.
-
-<h3>Types of Deep Cleaning:</h3>
-<h4>1. Home Deep Cleaning 🏠</h4>
-<br>✔ Kitchen – Scrubbing grease, cleaning behind appliances, disinfecting surfaces.
-<br>✔ Bathroom – Removing mold, scrubbing tiles and grout, sanitizing sinks and toilets.
-<br>✔ Floors & Walls – Mopping, steam cleaning, and removing stains.
-<br>✔ Windows & Doors – Wiping down frames, glass, and tracks.
-
-<h4>2. Upholstery & Fabric Deep Cleaning 🛋️🛏️</h4>
-<br>✔ Sofas & Chairs – Shampooing or steam cleaning fabric surfaces.
-<br>✔ Mattresses – Removing dust mites, stains, and odors.
-<br>✔ Carpets & Rugs – Shampooing, vacuuming, and deodorizing.
-
-<h4>3. Car Deep Cleaning 🚗</h4>
-<br>✔ Interior Cleaning – Shampooing seats, deep vacuuming, and dashboard polishing.
-<br>✔ Odor Removal – Eliminating smoke, food, or pet smells.
-<br>✔ Steam Cleaning – Killing bacteria and sanitizing surfaces.
-
-<h4>4. Post-Construction Deep Cleaning 🏗️</h4>
-<br>✔ Removing cement dust and debris.
-<br>✔ Cleaning paint splashes from floors and walls.
-<br>✔ Washing windows, doors, and air vents.
-
-<h3>Methods Used in Deep Cleaning:</h3>
-<br>✅ Steam Cleaning – Uses high-temperature steam to kill bacteria and loosen dirt.
-<br>✅ Shampooing – Deep cleans carpets, upholstery, and car interiors.
-<br>✅ Pressure Washing – Cleans outdoor areas like sidewalks, patios, and walls.
-<br>✅ Chemical Cleaning – Removes tough stains and disinfects surfaces.
-
-<h3>When Should You Get a Deep Cleaning?</h3>
-<br>🔹 Every 3 to 6 months for homes and businesses.
-<br>🔹 After renovations or moving in/out.
-<br>🔹 For allergies or respiratory issues.
-<br>🔹 If stains, odors, or dirt buildup is noticeable.
-        </div>
-
-        <div class="service">
-            <h2><u><font color="blue">5. Surface Cleaning 🧼🧽</font></u></h2>
-            <h3>Key Features of Surface Cleaning:</h3>
-            <br>✅ Removes everyday dust, dirt, and spills.
-            <br>✅ Prevents bacteria buildup but does not fully disinfect.
-            <br>✅ Quick and easy maintenance cleaning.
-            <br>✅ Protects surfaces from damage or staining.
-
-            <h3>Common Types of Surface Cleaning:</h3>
-            <h4>1. Home & Office Surface Cleaning 🏠🏢</h4>
-            <br>✔ Tables & Desks – Wiping with a damp cloth or disinfectant.
-            <br>✔ Countertops – Cleaning kitchen and bathroom surfaces with antibacterial sprays.
-            <br>✔ Floors – Sweeping, mopping, or vacuuming to remove dirt.
-            <br>✔ Windows & Mirrors – Using glass cleaner for streak-free shine.
-
-            <h4>2. Upholstery & Fabric Surface Cleaning 🛋️</h4>
-            <br>✔ Sofas & Chairs – Light vacuuming and spot-cleaning fabric.
-            <br>✔ Mattresses – Wiping down and using deodorizing sprays.
-            <br>✔ Carpets & Rugs – Vacuuming to remove dust and small debris.
-
-            <h4>3. Car Surface Cleaning 🚗</h4>
-            <br>✔ Dashboard & Console – Wiping with microfiber cloths and polish.
-            <br>✔ Seats & Doors – Cleaning leather or fabric with light sprays.
-            <br>✔ Glass & Mirrors – Using streak-free glass cleaner.
-
-            <h3>Methods Used in Surface Cleaning:</h3>
-            <br>✅ Wiping with Cloths or Sponges – Removes dust and fingerprints.
-            <br>✅ Vacuuming – Removes loose dirt from floors, upholstery, and carpets.
-            <br>✅ Sprays & Disinfectants – Cleans and sanitizes without heavy chemicals.
-            <br>✅ Microfiber Cleaning – Traps dust and prevents streaks.
-        </div>
-
-        <div class="service">
-            <h2><u><font color="blue">6. Professional/Office Cleaning 🏢✨</font></u></h2>
-            <p>We offer a professional cleaning in offices, homes, hotels and businesses</p>
-            <p>Here we ensure  deep cleaning, stain removal, odor elimination, and fabric protection by the use of specialized equipments and techniques of our employees.</p>
-            <h3>Types of Professional/Office Cleaning Services:</h3>
-<h4>1. Daily Office Cleaning 🗂️</h4>
-<br>✔ Dusting & Wiping – Desks, computers, and office furniture.
-<br>✔ Vacuuming & Mopping – Floors, carpets, and entryways.
-<br>✔ Trash Removal – Emptying bins and replacing liners.
-<br>✔ Restroom Cleaning – Sanitizing toilets, sinks, and mirrors.
-<br>✔ Kitchen & Breakroom Cleaning – Wiping counters, cleaning appliances.
-
-<h4>2. Deep Office Cleaning 🏢🧼 (Done Monthly or Quarterly)</h4>
-<br>✔ Carpet & Upholstery Cleaning – Shampooing and deep vacuuming.
-<br>✔ Window & Glass Cleaning – Removing smudges and streaks.
-<br>✔ Disinfection & Sanitization – Reducing germs and bacteria.
-<br>✔ Air Vent & HVAC Cleaning – Improving air quality.
-
-<h4>3. Specialized Office Cleaning Services 🏭🚀</h4>
-<br>.✔ Post-Construction Office Cleaning – After renovations or new office setups.
-<br>✔ Move-In / Move-Out Cleaning – Preparing for a new workspace.
-<br>✔ Electronics & Computer Cleaning – Removing dust from keyboards, monitors, and phones.
-<br>✔ Floor Maintenance – Polishing hardwood, scrubbing tiles, or waxing floors.
-
-<h3>Benefits of Professional Office Cleaning:</h3>
-<br>✅ Health & Hygiene – Reduces bacteria, viruses, and allergens.
-<br>✅ Employee Productivity – A clean workspace boosts focus and morale.
-<br>✅ Professional Appearance – Creates a welcoming space for clients and visitors.
-<br>✅ Longer Equipment & Furniture Life – Regular cleaning prevents wear and tear.
-
-<h3>Best Cleaning Methods for Offices:</h3>
-<br>🟢 Steam Cleaning – For deep cleaning carpets, upholstery, and high-touch surfaces.
-<br>🟢 Sanitization & Disinfection – For workstations, restrooms, and common areas.
-<br>🟢 HEPA Vacuuming – Traps fine dust and allergens.
-<br>🟢 Electrostatic Spraying – Covers large areas with disinfectant mist.
-</div>
-
-<div class="service">
-        <h2><u><font color="blue">7. Post-Construction Cleaning 🏗️🧹</font></u></h2>
-        <h3>Phases of Post-Construction Cleaning</h3>
-<h4>1. Rough Cleaning (Initial Phase) 🚧</h4>
-<br>🔹 Done before flooring, painting, or finishing touches are completed.
-<br>🔹 Involves removing large debris, construction dust, and leftover materials.
-<br>✔ Sweeping and vacuuming major dust.
-<br>✔ Removing paint and adhesive residues.
-<br>✔ Cleaning walls, windows, and doors of excess dust.
-
-<h4>2. Final / Deep Cleaning (After Construction is Completed) 🏡</h4>
-<br>🔹 Focuses on detailed cleaning of all surfaces.
-<br>✔ Dusting and wiping down walls, ceilings, and fixtures.
-<br>✔ Vacuuming and mopping floors, carpets, and tiles.
-<br>✔ Sanitizing kitchens, bathrooms, and high-touch areas.
-<br>✔ Cleaning air vents, cabinets, and light switches.
-<br>✔ Washing windows, mirrors, and glass panels.
-
-<h4>3. Touch-Up Cleaning (Last Phase) ✨</h4>
-<br>🔹 Performed a few days later to remove any settled dust.
-<br>✔ Re-cleaning windows and mirrors for a spotless finish.
-<br>✔ Checking corners, trims, and fixtures for dust or smudges.
-<br>✔ Final floor polishing or waxing (if needed).
-
-<h3>Best Cleaning Methods for Post-Construction Cleaning:</h3>
-<br>🟢 HEPA Vacuuming – Removes fine dust and construction debris.
-<br>🟢 Pressure Washing – Cleans driveways, sidewalks, and exteriors.
-<br>🟢 Steam Cleaning – Disinfects and deep-cleans surfaces.
-<br>🟢 Chemical Cleaning – Removes stubborn paint, glue, and cement stains.
-
-        <h3>Who Needs Post-Construction Cleaning?</h3>
-            <br>🏠 Homeowners – After home renovations or new builds.
-            <br>🏢 Businesses & Offices – Preparing a newly built or renovated workspace.
-            <br>🏗️ Construction Companies – Ensuring a finished project is move-in ready.
-
-            <h3>Why Post-Construction Cleaning is Important:</h3>
-<br>✅ Removes Hazardous Dust – Construction dust can cause breathing issues.
-<br>✅ Enhances Aesthetic Appeal – Makes the space look polished and brand new.
-<br>✅ Ensures Safety – Eliminates sharp debris and leftover construction materials.
-<br>✅ Speeds Up Move-In Process – Makes the space ready for use faster.
-        </div>
-        </section>
 
         <footer style="text-align: center; padding: 20px; background: #f4f4f4; color: #3cc2eb;">
             <p style="font-style: italic; font-size: 18px;">"A clean space is a happy place. Let us handle the dirt while you enjoy the comfort." ✨</p>
@@ -360,5 +276,29 @@
     <footer>
         <p><b><font color='blue'>&copy;2025 Fifo-Kleen Cleaning Services. All rights reserved</font></b></p>
     </footer>
+    <script>
+        const modeToggleBtn = document.getElementById("modeToggleBtn");
+        const savedTheme = localStorage.getItem("themeMode");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        function applyTheme(theme) {
+            const isDark = theme === "dark";
+            document.body.classList.toggle("dark-mode", isDark);
+            if (modeToggleBtn) {
+                modeToggleBtn.textContent = isDark ? "🌙 Dark" : "☀ Light";
+                modeToggleBtn.classList.toggle("active", isDark);
+                modeToggleBtn.setAttribute("aria-pressed", isDark ? "true" : "false");
+            }
+            localStorage.setItem("themeMode", theme);
+        }
+
+        applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
+        if (modeToggleBtn) {
+            modeToggleBtn.addEventListener("click", () => {
+                const nextTheme = document.body.classList.contains("dark-mode") ? "light" : "dark";
+                applyTheme(nextTheme);
+            });
+        }
+    </script>
 </body>
 </html>

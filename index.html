@@ -9,44 +9,44 @@
   
    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="fivestar.html" href="fivestar.html">
     <link rel="stylesheet" href="styles.css">
-    <link rel="Booking" href="booking.html">
-    <link rel="services" href="services.html">
 
 </head>
-<body>
-  <header>
-    <div>
-    <h1>Fifo-Kleen Cleaning Services</h1>
-  </header>
-</div>
+<body class="home-page">
 <div class="navbar">
-<div class="img-container">
-  <svg class="circular-text" viewBox="0 0 200 200">
-    <defs>
-      <path id="topArc" d="M 20, 100 A 80,80 0 0,1 180,100" fill="none" />
-      <path id="bottomArc" d="M 180, 100 A 80,80 0 0,1 20,100" fill="none" />
-    </defs>
-    <text font-size="16" font-weight="bold" fill="yellow" letter-spacing="4">
-      <textPath href="#topArc" startOffset="50%" text-anchor="middle">
-        FIFO-KLEEN
-      </textPath>
-    </text>
-    <text font-size="16" font-weight="bold" fill="yellow" letter-spacing="2">
-      <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">
-        CLEANING SERVICES
-      </textPath>
-    </text>
-  </svg>
-  <img src="img/logo.jpg" alt="Logo" class="navbar-logo" />
-</div>
+  <div class="logo-corner">
+    <div class="img-container">
+      <svg class="circular-text" viewBox="0 0 200 200">
+        <defs>
+          <path id="topArc" d="M 20, 100 A 80,80 0 0,1 180,100" fill="none" />
+          <path id="bottomArc" d="M 180, 100 A 80,80 0 0,1 20,100" fill="none" />
+        </defs>
+        <text font-size="18" letter-spacing="4">
+          <textPath href="#topArc" startOffset="50%" text-anchor="middle">
+            FIFO-KLEEN
+          </textPath>
+        </text>
+        <text font-size="16" letter-spacing="2.5">
+          <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">
+            CLEANING SERVICES
+          </textPath>
+        </text>
+      </svg>
+      <img src="img/logo.jpg" alt="Logo" class="navbar-logo" />
+    </div>
+  </div>
+
+  <div class="nav-info">
     <ul>
       <li><a href="index.html"><b>HOME</b></a></li>
       <li><a href="services.html"><b>SERVICES</b></a></li>
       <li><a href="contact.html"><b>CONTACT</b></a></li>
       <li><a href="fivestar.html">FIVESTAR</a></li>
+      <li class="mode-toggle-item">
+        <button type="button" id="modeToggleBtn" class="mode-btn" aria-pressed="false">☀ Light</button>
+      </li>
     </ul>
+  </div>
 </div>
 
   <main>
@@ -77,7 +77,20 @@
           <h3>Move In/Out Cleaning</h3>
           <p>Perfect for tenants, landlords, or agents to ensure a sparkling transition.</p>
         </div>
+        <div class="service-item">
+          <h3>Post-Construction Cleaning</h3>
+          <p>Detailed cleanup after construction or renovation to make spaces safe and ready for use.</p>
+        </div>
+        <div class="service-item">
+          <h3>Dry Cleaning</h3>
+          <p>Professional fabric-safe cleaning for garments and materials that need specialized care.</p>
+        </div>
       </div>
+    </section>
+
+    <section class="services rankings">
+      <h2>Top 5-Star Rankings</h2>
+      <div id="topRankings" class="service-list"></div>
     </section>
   </main>
 
@@ -87,55 +100,150 @@
     <a href="contact.html" class="cta-button">Get Started</a>
   </div>
   <!-- Booking Section -->
-  <form action="book.php" method="POST">
-    <label>Name:</label><br>
-    <input type="text" name="name" required><br><br>
+  <section class="booking-section">
+    <form id="bookingForm" class="booking-form" action="book.php" method="POST">
+      <h2>Book a Cleaning Service</h2>
+      <p class="booking-subtitle">Choose your service and preferred date. We will follow up shortly.</p>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+      <label for="booking-name">Name</label>
+      <input id="booking-name" type="text" name="name" placeholder="Your full name" required>
 
-    <label>Select Service:</label><br>
-    <select name="service" required>
-      <option value="Post-Construction Cleaning">Post-Construction Cleaning</option>
-      <option value="Professional/Office Cleaning">Professional/Office Cleaning</option>
-      <option value="Surface Cleaning">Surface Cleaning</option>
-      <option value="Deep Cleaning">Deep Cleaning</option>
-      <option value="Shampooing">Shampooing</option>
-      <option value="Dry Cleaning">Dry Cleaning</option>
-      <option value="Detail-Car Cleaning">Detail-Car Cleaning</option>
-    </select><br><br>
+      <label for="booking-email">Email</label>
+      <input id="booking-email" type="email" name="email" placeholder="you@example.com" required>
 
-    <label>Preferred Date:</label><br>
-    <input type="date" name="date" required><br><br>
+      <label for="booking-service">Select Service</label>
+      <select id="booking-service" name="service" required>
+        <option value="Post-Construction Cleaning">Post-Construction Cleaning</option>
+        <option value="Professional/Office Cleaning">Professional/Office Cleaning</option>
+        <option value="Surface Cleaning">Surface Cleaning</option>
+        <option value="Deep Cleaning">Deep Cleaning</option>
+        <option value="Shampooing">Shampooing</option>
+        <option value="Dry Cleaning">Dry Cleaning</option>
+        <option value="Detail-Car Cleaning">Detail-Car Cleaning</option>
+      </select>
 
-    <button type="submit">Book Now</button>
-  </form>
+      <label for="booking-date">Preferred Date</label>
+      <input id="booking-date" type="date" name="date" required>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </section>
   
   <script>
-document.getElementById("bookingForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+    const modeToggleBtn = document.getElementById("modeToggleBtn");
+    const bookingForm = document.getElementById("bookingForm");
+    const topRankings = document.getElementById("topRankings");
+    const savedTheme = localStorage.getItem("themeMode");
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  const form = e.target;
-  const formData = new FormData(form);
-
-  fetch("book.php", {
-    method: "POST",
-    body: formData
-  })
-  .then(response => response.text())
-  .then(data => {
-    if (data.trim() === "success") {
-      alert("Successfully booked!");
-      form.reset();
-    } else {
-      alert("Error: " + data);
+    function applyTheme(theme) {
+      const isDark = theme === "dark";
+      document.body.classList.toggle("dark-mode", isDark);
+      if (modeToggleBtn) {
+        modeToggleBtn.textContent = isDark ? "🌙 Dark" : "☀ Light";
+        modeToggleBtn.classList.toggle("active", isDark);
+        modeToggleBtn.setAttribute("aria-pressed", isDark ? "true" : "false");
+      }
+      localStorage.setItem("themeMode", theme);
     }
-  })
-  .catch(err => {
-    alert("Request failed: " + err);
-  });
-});
-</script>
+
+    applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
+
+    if (modeToggleBtn) {
+      modeToggleBtn.addEventListener("click", () => {
+        const nextTheme = document.body.classList.contains("dark-mode") ? "light" : "dark";
+        applyTheme(nextTheme);
+      });
+    }
+
+    if (bookingForm) {
+      bookingForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(bookingForm);
+        fetch("book.php", {
+          method: "POST",
+          body: formData
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            if (data.trim() === "success") {
+              alert("Booking submitted successfully.");
+              bookingForm.reset();
+            } else {
+              alert("Booking failed: " + data);
+            }
+          })
+          .catch((err) => {
+            alert("Request failed: " + err);
+          });
+      });
+    }
+
+    if (topRankings) {
+      const featuredRankings = [
+        {
+          name: "Khamisi Arnold",
+          rating: 5,
+          note: "Outstanding deep cleaning service. Very professional team."
+        },
+        {
+          name: "Spehen",
+          rating: 4,
+          note: "Great work and timely service. I recommend Fifo-Kleen."
+        },
+        {
+          name: "Felister",
+          rating: 5,
+          note: "Excellent attention to detail. My space looks amazing."
+        },
+        {
+          name: "Brian Otieno",
+          rating: 5,
+          note: "Very thorough service and great customer care from start to finish."
+        },
+        {
+          name: "Mercy Achieng",
+          rating: 4,
+          note: "Consistent quality work and a professional team."
+        }
+      ];
+
+      fetch("get_feedback.php")
+        .then((response) => response.json())
+        .then((items) => {
+          const dbItems = Array.isArray(items) ? items : [];
+          const allItems = [...featuredRankings, ...dbItems];
+          if (allItems.length === 0) {
+            topRankings.innerHTML = '<p>No feedback available yet.</p>';
+            return;
+          }
+
+          topRankings.innerHTML = allItems
+            .map(
+              (item) => `
+                <article class="service-item">
+                  ${item.name ? `<h4>${item.name}</h4>` : ""}
+                  <h3 class="rank-stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</h3>
+                  <p>${item.note}</p>
+                </article>`
+            )
+            .join("");
+        })
+        .catch(() => {
+          topRankings.innerHTML = featuredRankings
+            .map(
+              (item) => `
+                <article class="service-item">
+                  <h4>${item.name}</h4>
+                  <h3 class="rank-stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</h3>
+                  <p>${item.note}</p>
+                </article>`
+            )
+            .join("");
+        });
+    }
+  </script>
   
   <!-- Contact Section -->
   <section id="contact" class="bg-green-100 p-6 mt-10 text-center">
