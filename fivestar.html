@@ -96,10 +96,101 @@
                 <li><a href="services.html"><b>SERVICES</b></a></li>
                 <li><a href="contact.html"><b>CONTACT</b></a></li>
                 <li><a href="fivestar.html">FIVESTAR</a></li>
+                <li class="auth-item"><button type="button" id="openAuthBtn" class="auth-btn"><img id="accountAvatar" class="account-avatar hidden" alt="Account avatar"><span id="accountLabel" class="account-label">Account</span></button></li>
+                <li id="authStatus" class="auth-status" aria-live="polite"></li>
                 <li class="mode-toggle-item">
                     <button type="button" id="modeToggleBtn" class="mode-btn" aria-pressed="false">☀ Light</button>
                 </li>
+                <li class="auth-item"><button type="button" id="logoutBtn" class="auth-btn logout-btn">Log Out</button></li>
             </ul>
+        </div>
+    </div>
+
+    <div id="authModal" class="auth-modal" aria-hidden="true">
+        <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+            <button type="button" id="closeAuthModalBtn" class="auth-close" aria-label="Close">x</button>
+            <h3 id="authTitle">Account Access</h3>
+            <p id="authMessage" class="auth-message"></p>
+
+            <form id="signupForm" class="auth-form">
+                <h4>Create account</h4>
+                <label for="signup-name">Full Name</label>
+                <input id="signup-name" type="text" required>
+                <label for="signup-email">Email</label>
+                <input id="signup-email" type="email" required>
+                <label for="signup-password">Password</label>
+                <input id="signup-password" type="password" minlength="4" required>
+                <button type="submit">Create Account</button>
+                <button type="button" id="showLoginBtn" class="auth-link-btn">Already registered? Log In</button>
+            </form>
+
+            <form id="loginForm" class="auth-form hidden">
+                <h4>Log in</h4>
+                <label for="login-email">Email</label>
+                <input id="login-email" type="email" required>
+                <label for="login-password">Password</label>
+                <input id="login-password" type="password" required>
+                <button type="submit">Log In</button>
+                <button type="button" id="showSignupBtn" class="auth-link-btn">Need an account? Sign Up</button>
+            </form>
+
+            <div id="accountSettings" class="auth-settings hidden">
+                <h4>Profile Settings</h4>
+                <small>Personalize your account details.</small>
+                <form id="accountSettingsForm" class="auth-form">
+                    <label for="settings-name">Full Name</label>
+                    <input id="settings-name" type="text" required>
+                    <label for="settings-email">Email</label>
+                    <input id="settings-email" type="email" readonly>
+                    <label for="settings-phone">Phone</label>
+                    <input id="settings-phone" type="tel" placeholder="+254...">
+                    <label for="settings-location">Location</label>
+                    <input id="settings-location" type="text" placeholder="City, Country">
+                    <label for="settings-service">Preferred Service</label>
+                    <select id="settings-service">
+                        <option value="">Select preference</option>
+                        <option value="Post-Construction Cleaning">Post-Construction Cleaning</option>
+                        <option value="Professional/Office Cleaning">Professional/Office Cleaning</option>
+                        <option value="Surface Cleaning">Surface Cleaning</option>
+                        <option value="Deep Cleaning">Deep Cleaning</option>
+                        <option value="Shampooing">Shampooing</option>
+                        <option value="Dry Cleaning">Dry Cleaning</option>
+                        <option value="Detail-Car Cleaning">Detail-Car Cleaning</option>
+                    </select>
+                    <label for="settings-contact">Preferred Contact Method</label>
+                    <select id="settings-contact">
+                        <option value="">Select contact method</option>
+                        <option value="Email">Email</option>
+                        <option value="Phone">Phone</option>
+                        <option value="WhatsApp">WhatsApp</option>
+                    </select>
+                    <label for="settings-theme">Theme Preference</label>
+                    <select id="settings-theme">
+                        <option value="system">System</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                    <label for="settings-avatar-emoji">Avatar (Emoji)</label>
+                    <input id="settings-avatar-emoji" type="text" maxlength="2" placeholder="🙂">
+                    <label for="settings-avatar">Profile Picture</label>
+                    <input id="settings-avatar" type="file" accept="image/*">
+                    <label for="settings-notes">Notes</label>
+                    <textarea id="settings-notes" placeholder="Any extra preferences for your cleaning service"></textarea>
+                    <button type="submit">Save Settings</button>
+                </form>
+
+                <h4>Security</h4>
+                <small>Update your password.</small>
+                <form id="passwordForm" class="auth-form">
+                    <label for="current-password">Current Password</label>
+                    <input id="current-password" type="password" required>
+                    <label for="new-password">New Password</label>
+                    <input id="new-password" type="password" minlength="4" required>
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input id="confirm-password" type="password" minlength="4" required>
+                    <button type="submit">Update Password</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -170,8 +261,176 @@
     </script>
     <script>
         const modeToggleBtn = document.getElementById("modeToggleBtn");
+        const authModal = document.getElementById("authModal");
+        const authMessage = document.getElementById("authMessage");
+        const signupForm = document.getElementById("signupForm");
+        const loginForm = document.getElementById("loginForm");
+        const showLoginBtn = document.getElementById("showLoginBtn");
+        const showSignupBtn = document.getElementById("showSignupBtn");
+        const openAuthBtn = document.getElementById("openAuthBtn");
+        const accountAvatar = document.getElementById("accountAvatar");
+        const accountLabel = document.getElementById("accountLabel");
+        const closeAuthModalBtn = document.getElementById("closeAuthModalBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+        const authStatus = document.getElementById("authStatus");
+        const accountSettings = document.getElementById("accountSettings");
+        const accountSettingsForm = document.getElementById("accountSettingsForm");
+        const passwordForm = document.getElementById("passwordForm");
         const savedTheme = localStorage.getItem("themeMode");
         const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const USERS_KEY = "fifoUsers";
+        const SESSION_KEY = "fifoCurrentUser";
+        const PROFILES_KEY = "fifoProfiles";
+
+        function getUsers() {
+            try {
+                return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function setUsers(users) {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        }
+
+        function getCurrentUser() {
+            try {
+                return JSON.parse(localStorage.getItem(SESSION_KEY));
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function setCurrentUser(user) {
+            localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+        }
+
+        function clearCurrentUser() {
+            localStorage.removeItem(SESSION_KEY);
+        }
+
+        function getProfiles() {
+            try {
+                return JSON.parse(localStorage.getItem(PROFILES_KEY)) || {};
+            } catch (error) {
+                return {};
+            }
+        }
+
+        function saveProfile(email, profileData) {
+            const profiles = getProfiles();
+            profiles[email] = profileData;
+            localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+        }
+
+        function getProfile(email) {
+            const profiles = getProfiles();
+            return profiles[email] || {};
+        }
+
+        function setAuthMessage(message, isError = false) {
+            if (!authMessage) return;
+            authMessage.textContent = message;
+            authMessage.style.color = isError ? "#b91c1c" : "#0f766e";
+        }
+
+        function readFileAsDataUrl(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = () => reject(new Error("Could not read selected image."));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function setAuthMode(mode) {
+            const user = getCurrentUser();
+            if (!user && mode === "settings") {
+                mode = "signup";
+            }
+            const isSignup = mode === "signup";
+            const isLogin = mode === "login";
+            const isSettings = mode === "settings";
+            signupForm?.classList.toggle("hidden", !isSignup);
+            loginForm?.classList.toggle("hidden", !isLogin);
+            accountSettings?.classList.toggle("hidden", !isSettings);
+            if (isSignup) {
+                document.getElementById("signup-name")?.focus();
+            } else if (isLogin) {
+                document.getElementById("login-email")?.focus();
+            } else if (isSettings) {
+                document.getElementById("settings-name")?.focus();
+            }
+        }
+
+        function loadSettingsForCurrentUser() {
+            const user = getCurrentUser();
+            if (!user) return;
+
+            const profile = getProfile(user.email);
+            const themeMode = localStorage.getItem("themeMode") || "light";
+            document.getElementById("settings-name").value = profile.name || user.name || "";
+            document.getElementById("settings-email").value = user.email;
+            document.getElementById("settings-phone").value = profile.phone || "";
+            document.getElementById("settings-location").value = profile.location || "";
+            document.getElementById("settings-service").value = profile.service || "";
+            document.getElementById("settings-contact").value = profile.contactMethod || "";
+            document.getElementById("settings-theme").value = themeMode;
+            document.getElementById("settings-avatar-emoji").value = profile.avatarEmoji || "";
+            document.getElementById("settings-avatar").value = "";
+            document.getElementById("settings-notes").value = profile.notes || "";
+        }
+
+        function openAuthModal(mode) {
+            if (!authModal) return;
+            authModal.classList.add("open");
+            authModal.setAttribute("aria-hidden", "false");
+            setAuthMode(mode);
+        }
+
+        function closeAuthModal() {
+            if (!authModal) return;
+            authModal.classList.remove("open");
+            authModal.setAttribute("aria-hidden", "true");
+        }
+
+        function renderAccountButton(user) {
+            if (!accountAvatar || !accountLabel) return;
+            if (!user) {
+                accountAvatar.classList.add("hidden");
+                accountLabel.classList.remove("hidden");
+                accountLabel.textContent = "Account";
+                return;
+            }
+
+            const profile = getProfile(user.email);
+            if (profile.avatarImage) {
+                accountAvatar.src = profile.avatarImage;
+                accountAvatar.classList.remove("hidden");
+                accountLabel.classList.add("hidden");
+                return;
+            }
+
+            accountAvatar.classList.add("hidden");
+            accountLabel.classList.remove("hidden");
+            accountLabel.textContent = profile.avatarEmoji || "My Account";
+        }
+
+        function updateAuthUI() {
+            const user = getCurrentUser();
+            const isAuthenticated = Boolean(user);
+            if (!isAuthenticated && accountSettings) {
+                accountSettings.classList.add("hidden");
+            }
+            renderAccountButton(user);
+            if (authStatus) {
+                authStatus.textContent = isAuthenticated ? `Hi, ${user.name}` : "Not logged in";
+            }
+            if (logoutBtn) {
+                logoutBtn.style.display = isAuthenticated ? "inline-block" : "none";
+            }
+        }
 
         function applyTheme(theme) {
             const isDark = theme === "dark";
@@ -185,12 +444,178 @@
         }
 
         applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
+
         if (modeToggleBtn) {
             modeToggleBtn.addEventListener("click", () => {
                 const nextTheme = document.body.classList.contains("dark-mode") ? "light" : "dark";
                 applyTheme(nextTheme);
             });
         }
+
+        openAuthBtn?.addEventListener("click", () => {
+            const user = getCurrentUser();
+            if (user) {
+                setAuthMessage("Manage your account settings.");
+                loadSettingsForCurrentUser();
+                openAuthModal("settings");
+            } else {
+                setAuthMessage("Create your account, then log in to continue.");
+                openAuthModal("signup");
+            }
+        });
+
+        closeAuthModalBtn?.addEventListener("click", closeAuthModal);
+
+        authModal?.addEventListener("click", (event) => {
+            if (event.target === authModal) {
+                closeAuthModal();
+            }
+        });
+
+        showLoginBtn?.addEventListener("click", () => {
+            setAuthMessage("Log in with the account you created.");
+            setAuthMode("login");
+        });
+
+        showSignupBtn?.addEventListener("click", () => {
+            setAuthMessage("Create your account first.");
+            setAuthMode("signup");
+        });
+
+        signupForm?.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const name = document.getElementById("signup-name").value.trim();
+            const email = document.getElementById("signup-email").value.trim().toLowerCase();
+            const password = document.getElementById("signup-password").value;
+
+            if (!name || !email || !password) {
+                setAuthMessage("All sign-up fields are required.", true);
+                return;
+            }
+
+            const users = getUsers();
+            const exists = users.some((user) => user.email === email);
+            if (exists) {
+                document.getElementById("login-email").value = email;
+                setAuthMessage("Account already exists. Please log in.", true);
+                setAuthMode("login");
+                return;
+            }
+
+            users.push({ name, email, password });
+            setUsers(users);
+            signupForm.reset();
+            document.getElementById("login-email").value = email;
+            document.getElementById("login-password").value = "";
+            setAuthMessage("Sign-up successful. Now log in to confirm your credentials.");
+            setAuthMode("login");
+        });
+
+        loginForm?.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const email = document.getElementById("login-email").value.trim().toLowerCase();
+            const password = document.getElementById("login-password").value;
+            const users = getUsers();
+            const user = users.find((item) => item.email === email && item.password === password);
+
+            if (!user) {
+                setAuthMessage("Invalid email or password.", true);
+                return;
+            }
+
+            setCurrentUser({ name: user.name, email: user.email });
+            loginForm.reset();
+            updateAuthUI();
+            loadSettingsForCurrentUser();
+            setAuthMessage("Login successful. You can now personalize your account settings.");
+            setAuthMode("settings");
+        });
+
+        logoutBtn?.addEventListener("click", () => {
+            clearCurrentUser();
+            updateAuthUI();
+            setAuthMessage("You have been logged out.");
+            setAuthMode("signup");
+        });
+
+        accountSettingsForm?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const user = getCurrentUser();
+            if (!user) {
+                setAuthMessage("Log in first to save settings.", true);
+                setAuthMode("login");
+                return;
+            }
+
+            const updatedName = document.getElementById("settings-name").value.trim();
+            const avatarEmoji = document.getElementById("settings-avatar-emoji").value.trim();
+            const avatarFile = document.getElementById("settings-avatar").files[0];
+            const existingProfile = getProfile(user.email);
+            let avatarImage = existingProfile.avatarImage || "";
+            if (avatarFile) {
+                try {
+                    avatarImage = await readFileAsDataUrl(avatarFile);
+                } catch (error) {
+                    setAuthMessage(error.message, true);
+                    return;
+                }
+            }
+            const profileData = {
+                name: updatedName,
+                phone: document.getElementById("settings-phone").value.trim(),
+                location: document.getElementById("settings-location").value.trim(),
+                service: document.getElementById("settings-service").value,
+                contactMethod: document.getElementById("settings-contact").value,
+                avatarEmoji: avatarEmoji,
+                avatarImage: avatarImage,
+                notes: document.getElementById("settings-notes").value.trim()
+            };
+
+            saveProfile(user.email, profileData);
+            setCurrentUser({ name: updatedName || user.name, email: user.email });
+            updateAuthUI();
+
+            const selectedTheme = document.getElementById("settings-theme").value;
+            if (selectedTheme === "light" || selectedTheme === "dark") {
+                applyTheme(selectedTheme);
+            } else {
+                const systemTheme = prefersDark ? "dark" : "light";
+                applyTheme(systemTheme);
+            }
+            setAuthMessage("Account settings saved successfully.");
+        });
+
+        passwordForm?.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const user = getCurrentUser();
+            if (!user) {
+                setAuthMessage("Log in first to update password.", true);
+                setAuthMode("login");
+                return;
+            }
+
+            const currentPassword = document.getElementById("current-password").value;
+            const newPassword = document.getElementById("new-password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            if (newPassword !== confirmPassword) {
+                setAuthMessage("New password and confirmation do not match.", true);
+                return;
+            }
+
+            const users = getUsers();
+            const idx = users.findIndex((item) => item.email === user.email && item.password === currentPassword);
+            if (idx === -1) {
+                setAuthMessage("Current password is incorrect.", true);
+                return;
+            }
+
+            users[idx].password = newPassword;
+            setUsers(users);
+            passwordForm.reset();
+            setAuthMessage("Password updated successfully.");
+        });
+
+        updateAuthUI();
     </script>
 
     <footer>
@@ -199,3 +624,6 @@
 
 </body>
 </html>
+
+
+
