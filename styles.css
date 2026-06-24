@@ -1106,3 +1106,84 @@ body.dark-mode.home-page .booking-form {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14) !important;
   overflow: hidden;
 }
+
+.about-hero {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 24px;
+            background: blue;
+            background: transparent;
+            border: 1px solid rgba(0, 90, 156, 0.25);
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(10px);
+        }
+        .about-hero h1 {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #FFD700;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+        }
+        .info-card {
+            background: white !important;
+            border: 1px solid rgba(0, 90, 156, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .info-card h2 {
+            margin-bottom: 10px;
+            color: blue;
+            font-size: 1.3rem;
+        }
+        .info-card p,
+        .info-card li {
+            color: #080cdb;
+            opacity: 1;
+            text-shadow: none;
+            font-weight: 500;
+        }
+        .info-card ul {
+            padding-left: 18px;
+        }
+        h1, h2, h3 {
+            color: #8A4B08;
+        }
+        .about-hero,
+        .service-summary,
+        .service-card,
+        .info-card {
+            text-shadow: none;
+            filter: none;
+        }
+        body.dark-mode .about-hero,
+        body.dark-mode .service-summary {
+            background: rgba(20, 4, 243, 0.15);
+        }
+        body.dark-mode .info-card,
+        body.dark-mode .service-card {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: rgba(0, 90, 156, 0.25);
+        }
+        body.dark-mode .info-card p,
+        body.dark-mode .info-card li,
+        body.dark-mode .service-card p {
+            color: #17324d !important;
+            text-shadow: none !important;
+        }
+        body.dark-mode .info-card h2,
+        body.dark-mode .service-card h2,
+        body.dark-mode .about-hero h1,
+        body.dark-mode .service-summary h1 {
+            color: #fde68a !important;
+        }
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3 {
+            color: #fde68a !important;
+        }
